@@ -1,0 +1,74 @@
+/*
+You have to get a new driver's license and you show up at the office at the same time as 4 other people. The office says
+that they will see everyone in alphabetical order and it takes 20 minutes for them to process each new license.
+All of the agents are available now, and they can each see one customer at a time. How long will it take for you
+to walk out of the office with your new license?
+
+Task
+Given everyone's name that showed up at the same time, determine how long it will take to get your new license.
+
+Input Format
+Your input will be a string of your name, then an integer of the number of available agents, and lastly a string
+of the other four names separated by spaces.
+
+Output Format
+You will output an integer of the number of minutes that it will take to get your license.
+
+Sample Input
+'Eric'
+2
+'Adam Caroline Rebecca Frank'
+Sample Output
+40
+
+Explanation
+It will take 40 minutes to get your license because you are in the second group of two to be seen by one
+of the two available agents.
+*/
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class DrivingLicence {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String yourName = scanner.next();
+        int numberOfAgents = scanner.nextInt();
+        String[] namesOfCustomers = new String[4];
+        int counter = 0;
+
+        for (int i = 0; i < 4; i++) {
+            namesOfCustomers[i] = scanner.next();
+        }
+
+        String[] namesOfCustomersAndMine = { namesOfCustomers[0], namesOfCustomers[1], namesOfCustomers[2],
+                namesOfCustomers[3], yourName };
+
+        Arrays.sort(namesOfCustomersAndMine);
+
+        for (String item : namesOfCustomersAndMine) {
+            counter++;
+            if (yourName.equals(item)) break;
+        }
+        switch (numberOfAgents) {
+            case 2 : if (counter < 3) {
+                System.out.println(20);
+            } else if (counter < 5) {
+                System.out.println(40);
+            } else {
+                System.out.println(60);
+            } break;
+            case 3 : if (counter < 4) {
+                System.out.println(20);
+            } else {
+                System.out.println(40);
+            } break;
+            case 4 : if (counter < 5) {
+                System.out.println(20);
+            } else {
+                System.out.println(40);
+            } break;
+            default : System.out.println(20);
+        }
+    }
+}
